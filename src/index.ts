@@ -1,3 +1,4 @@
+import { ASSETS } from "./asset-data";
 import { generateIcon } from "./generate-icon";
 
 export interface LeveragedToken {
@@ -41,11 +42,10 @@ export async function generateIcons(params: {
   if (params.asset) {
     await generateIcon(symbolToLeveragedToken(params.asset), pxNumber);
   } else {
-    const assets = ["BTC", "ETH", "BNB"];
-    const leverages = [1, 2, 3];
+    const leverages = [1, 2, 3, 4, 5, 7];
     const longs = [true, false];
 
-    for (const asset of assets) {
+    for (const asset of ASSETS) {
       for (const leverage of leverages) {
         for (const long of longs) {
           await generateIcon({ asset, leverage, long }, pxNumber);
