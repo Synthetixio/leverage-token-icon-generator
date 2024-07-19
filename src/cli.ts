@@ -10,12 +10,12 @@ program
     "-a, --asset [symbol]",
     "Leveraged Token Symbol to generate icon for (e.g. BTC2L). Defaults to generating all icons"
   )
-  .option("-p, --px [size]", "Size of the icon in pixels [32]", "32")
+  .option("-p, --pixels [size]", "Size of the icon in pixels [32]", "32")
   .parse(process.argv);
 
 const options = program.opts();
 
 generateIcons({
   asset: options.asset,
-  px: options.px,
+  pixels: options.pixels,
 }).then((result) => console.log(result.message));

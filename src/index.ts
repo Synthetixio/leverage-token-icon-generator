@@ -1,3 +1,5 @@
+import { generateIcon } from "./generate-icon";
+
 export interface LeveragedToken {
   asset: string;
   leverage: number;
@@ -22,23 +24,22 @@ function symbolToLeveragedToken(symbol: string): LeveragedToken {
   return { asset, leverage, long };
 }
 
-export async function generateIcon(
-  leveragedToken: LeveragedToken
-): Promise<void> {
-  console.log(
-    `${leveragedToken.asset}${leveragedToken.leverage}${
-      leveragedToken.long ? "L" : "S"
-    }`
-  );
-}
-
 export async function generateIcons(params: {
   asset: string | null;
-  px: number;
+  pixels: string;
 }): Promise<{ message: string }> {
-  console.log(params);
+  // Parse pixels
+  let pxNumber = 0;
+  try {
+    pxNumber = parseInt(params.pixels, 10);
+    if (isNaN(pxNumber)) return { message: "Invalid px value" };
+  } catch (e) {
+    return { message: "Invalid px value" };
+  }
+
+  // Generate icons
   if (params.asset) {
-    await generateIcon(symbolToLeveragedToken(params.asset));
+    await generateIcon(symbolToLeveragedToken(params.asset), pxNumber);
   } else {
     const assets = ["BTC", "ETH", "BNB"];
     const leverages = [1, 2, 3];
@@ -47,10 +48,10 @@ export async function generateIcons(params: {
     for (const asset of assets) {
       for (const leverage of leverages) {
         for (const long of longs) {
-          await generateIcon({ asset, leverage, long });
+          await generateIcon({ asset, leverage, long }, pxNumber);
         }
       }
     }
   }
-  return { message: "Generated icons" };
+  return { message: "Complete" };
 }
