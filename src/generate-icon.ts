@@ -1,15 +1,8 @@
 import { LeveragedToken } from ".";
 import * as fs from "fs";
+import { createCanvas, Image } from "canvas";
 
-const ASSET_ICON_PERCENT = 0.5;
-
-const { createCanvas, loadImage, Image } = require("canvas");
-
-export async function getAssetIcon(asset: string): Promise<string> {
-  const URL = `https://synthetixio.github.io/synthetix-assets/markets/${asset}.svg`;
-  const res = await fetch(URL);
-  return await res.text();
-}
+const ASSET_ICON_PERCENT = 0.66666;
 
 export async function generateIcon(
   lt: LeveragedToken,
