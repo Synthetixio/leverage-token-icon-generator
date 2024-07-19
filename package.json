@@ -14,6 +14,7 @@
     "typescript": "^5.5.3"
   },
   "dependencies": {
-    "commander": "^12.1.0"
+    "commander": "^12.1.0",
+    "pureimage": "^0.4.13"
   }
 }
