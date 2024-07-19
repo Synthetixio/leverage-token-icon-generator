@@ -12,7 +12,7 @@ function symbolToLeveragedToken(symbol: string): LeveragedToken {
   let long = false;
   const chars = symbol.split("");
   for (const char of chars) {
-    if (/[a-zA-Z]/.test(char)) {
+    if (/[a-zA-Z]/.test(char) && leverage === 0) {
       asset += char;
     } else if (/[0-9]/.test(char)) {
       leverage = parseInt(char, 10);
