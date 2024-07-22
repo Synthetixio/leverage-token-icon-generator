@@ -1,3 +1,2 @@
-- Change asset to be BTC and add a lt option for BTC2L
 - README
 - LICENSE
