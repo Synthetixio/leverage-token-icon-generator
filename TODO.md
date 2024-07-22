@@ -1,5 +1,3 @@
+- Change asset to be BTC and add a lt option for BTC2L
 - README
 - LICENSE
-- Move the asset list to pull from somewhere centralised
-- Generate the images
-- Change asset to be BTC and add a lt option for BTC2L
