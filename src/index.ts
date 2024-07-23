@@ -8,21 +8,10 @@ export interface LeveragedToken {
 }
 
 function symbolToLeveragedToken(symbol: string): LeveragedToken {
-  let asset = "";
-  let leverage = 0;
-  let long = false;
-  const chars = symbol.split("");
-  for (const char of chars) {
-    if (/[a-zA-Z]/.test(char) && leverage === 0) {
-      asset += char;
-    } else if (/[0-9]/.test(char)) {
-      leverage = parseInt(char, 10);
-    } else {
-      long = char === "L";
-    }
-  }
-
-  return { asset, leverage, long };
+  const result = /([A-Z]+)([0-9]+)(L|S)/.exec(symbol);
+  if (result === null) throw new Error("Invalid token symbol");
+  const [_, asset, leverageString, longString] = result!;
+  return { asset, leverage: Number(leverageString), long: longString === "L" };
 }
 
 export async function generateIcons(params: {
