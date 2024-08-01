@@ -7,12 +7,12 @@ export interface LeveragedToken {
   long: boolean;
 }
 
-function symbolToLeveragedToken(symbol: string): LeveragedToken {
+const symbolToLeveragedToken = (symbol: string): LeveragedToken => {
   const result = /([A-Z]+)([0-9]+)(L|S)/.exec(symbol);
   if (result === null) throw new Error("Invalid token symbol");
   const [_, asset, leverageString, longString] = result!;
   return { asset, leverage: Number(leverageString), long: longString === "L" };
-}
+};
 
 export async function generateIcons(params: {
   token: string | null;
@@ -41,7 +41,7 @@ export async function generateIcons(params: {
     }
     await generateIcon(lt, pxNumber);
   } else {
-    const leverages = [1, 2, 3, 4, 5, 7];
+    const leverages = [1, 2, 3, 4, 5, 7, 10, 15, 20];
     const longs = [true, false];
     for (const leverage of leverages) {
       for (const long of longs) {

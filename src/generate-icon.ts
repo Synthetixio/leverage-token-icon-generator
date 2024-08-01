@@ -101,8 +101,8 @@ export async function generateIcon(
 
   // Write to file
   try {
-    fs.mkdirSync(`icons/${lt.asset}`, { recursive: true });
-    const out = fs.createWriteStream(`icons/${lt.asset}/${symbol}.png`);
+    fs.mkdirSync(`icons`, { recursive: true });
+    const out = fs.createWriteStream(`icons/${symbol}.png`);
     const stream = canvas.createPNGStream();
     stream.pipe(out);
   } catch (e) {
