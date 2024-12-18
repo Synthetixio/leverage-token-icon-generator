@@ -4,7 +4,7 @@ import { createCanvas, Image } from "canvas";
 import ASSET_DATA from "./asset-data";
 
 const ASSET_ICON_PERCENT = 0.59;
-const X_ASPECT_RATIO = 1.18040621266;
+const X_ASPECT_RATIO = 0.70588235294;
 const ARROW_ASPECT_RATIO = 0.625;
 
 export async function generateIcon(
@@ -58,7 +58,7 @@ export async function generateIcon(
 
   // Draw X on canvas
   const xImg = new Image();
-  const xSize = px * 0.1;
+  const xSize = px * 0.115;
   xImg.onload = () => {
     ctx.drawImage(
       xImg,
