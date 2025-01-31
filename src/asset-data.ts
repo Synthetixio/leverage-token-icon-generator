@@ -4,6 +4,21 @@ interface AssetData {
 }
 
 const ASSET_DATA: Record<string, AssetData> = {
+  TRUMP: {
+    color: "#f4de92",
+  },
+  WIF: {
+    color: "#a19484",
+  },
+  PNUT: {
+    color: "#68a2d3",
+  },
+  BONK: {
+    color: "#FDDE03",
+  },
+  FARTCOIN: {
+    color: "#1C1C1C",
+  },
   "1INCH": {
     color: "#1C324F",
   },
