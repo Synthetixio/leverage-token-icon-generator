@@ -3,15 +3,15 @@ import * as fs from "fs";
 import { createCanvas, Image } from "canvas";
 import ASSET_DATA from "./asset-data";
 
-const ASSET_ICON_PERCENT = 0.59;
-const X_ASPECT_RATIO = 0.70588235294;
+const ASSET_ICON_PERCENT = 0.55;
+const X_ASPECT_RATIO = 1.0556621881;
 const ARROW_ASPECT_RATIO = 0.625;
 
 export async function generateIcon(
   lt: LeveragedToken,
   px: number
 ): Promise<void> {
-  const symbol = `${lt.asset}${lt.leverage}${lt.long ? "L" : "S"}`;
+  const symbol = `${lt.asset}${lt.long ? "BULL" : "BEAR"}`;
   console.log(`Generating: ${symbol} (${px}px)`);
 
   const assetData = ASSET_DATA[lt.asset];
@@ -56,9 +56,9 @@ export async function generateIcon(
   img.onload = () => ctx.drawImage(img, start, start, asssetSize, asssetSize);
   img.src = `./asset-icons/${lt.asset}.png`;
 
-  // Draw X on canvas
+  // Draw Bull/Bear icon on canvas
   const xImg = new Image();
-  const xSize = px * 0.115;
+  const xSize = px * 0.145;
   xImg.onload = () => {
     ctx.drawImage(
       xImg,
@@ -75,29 +75,21 @@ export async function generateIcon(
       xSize * X_ASPECT_RATIO
     );
   };
-  xImg.src = "./greeble/x.png";
+  xImg.src = lt.long ? "./greeble/bull.png" : "./greeble/bear.png";
 
-  // Draw Arrow on canvas
-  const arrowImg = new Image();
-  const arrowSize = px * 0.17;
-  const arrowHeight = arrowSize * ARROW_ASPECT_RATIO;
-  arrowImg.onload = () => {
-    ctx.drawImage(
-      arrowImg,
-      (px - arrowSize) / 2,
-      (start - arrowHeight) / 2,
-      arrowSize,
-      arrowHeight
-    );
-  };
-  arrowImg.src = `./greeble/arrow-${lt.long ? "up" : "down"}.png`;
+  // Draw Bull/Bear on canvas
+  ctx.fillStyle = "#fff";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.font = `600 ${px / 8}px Arial`;
+  ctx.fillText(lt.long ? "BULL" : "BEAR", px / 2, (start * 1.15) / 2);
 
   // Draw text on canvas
   ctx.fillStyle = "#fff";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.font = `600 ${px / 7}px Arial`;
-  ctx.fillText(lt.leverage.toString(), px / 2, px - start / 2);
+  ctx.font = `600 ${px / 8}px Arial`;
+  ctx.fillText(`${lt.leverage.toString()}X`, px / 2, px - (start * 1.15) / 2);
 
   // Write to file
   try {
