@@ -41,7 +41,7 @@ export async function generateIcons(params: {
     }
     await generateIcon(lt, pxNumber);
   } else {
-    const leverages = [1, 2, 3, 4, 5, 7, 10, 15, 20];
+    const leverages = [3];
     const longs = [true, false];
     for (const leverage of leverages) {
       for (const long of longs) {
