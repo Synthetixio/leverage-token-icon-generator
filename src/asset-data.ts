@@ -4,6 +4,9 @@ interface AssetData {
 }
 
 const ASSET_DATA: Record<string, AssetData> = {
+  BERA: {
+    color: "#814625",
+  },
   TRUMP: {
     color: "#f4de92",
   },
